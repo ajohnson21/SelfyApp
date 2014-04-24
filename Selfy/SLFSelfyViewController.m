@@ -75,6 +75,13 @@
     return self;
 }
 
+-(void)submitButton
+{
+    // PFObject class name "UserSelfy"
+    // put a png file inside app
+    // PFFILE
+}
+
 -(void)tapScreen
 {
     [captionField resignFirstResponder];

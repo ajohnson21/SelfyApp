@@ -11,6 +11,7 @@
 
 #import "SLFLoginViewController.h"
 #import "SLFSelfyViewController.h"
+#import "SLFTableViewController.h"
 
 @interface SLFLoginViewController () <UITextFieldDelegate>
 
@@ -23,6 +24,7 @@
     UIButton * signInButton;
     UILabel *titleHeader;
     UIView * loginForm;
+    UIAlertView * alert;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -68,6 +70,8 @@
         [signInButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [loginForm addSubview:signInButton];
         
+      
+        
         UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapScreen)];
         [self.view addGestureRecognizer:tap];
         
@@ -103,18 +107,35 @@
 
 -(void)signInButton
 {
-//    PFObject *testObject = [PFObject objectWithClassName:@"TestObject"];
-//    testObject[@"foo"] = @"bar";
-//    [testObject saveInBackground];
     
     PFUser * user = [PFUser currentUser];
     
     user.username = nameField.text;
     user.password = password.text;
     
-    [user saveInBackground];
+    nameField.text = nil;
+    password.text = nil;
     
-    NSLog(@"testing submit button");
+    // uiActivityIndicatorView
+    // run method start...
+    // addsubview
+    
+    [user saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error)
+    {
+        if (error == nil)
+        {
+            self.navigationController.navigationBarHidden = NO;
+            self.navigationController.viewControllers = @[[[SLFTableViewController alloc] initWithStyle:UITableViewStylePlain]];
+        }
+        else
+        {
+//            error.userinfo[@"error"]
+//            UIAlertView with message
+            
+            // activity indicator remove
+        }
+    }];
+    
 }
 
 - (void)viewDidLoad
