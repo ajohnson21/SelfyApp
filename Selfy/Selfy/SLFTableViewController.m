@@ -93,7 +93,10 @@
 
 -(void)addNew
 {
-    //
+    UIViewController*  svc = [[SLFSelfyViewController alloc] init];
+    
+    [[self navigationController] pushViewController:svc animated:YES];
+
 }
 
 - (void)viewDidLoad

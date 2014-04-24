@@ -5,6 +5,7 @@
 //  Created by Austen Johnson on 4/21/14.
 //  Copyright (c) 2014 Austen Johnson. All rights reserved.
 //
+//hello
 
 #import <Parse/Parse.h>
 
@@ -27,7 +28,15 @@
 //     self.window.rootViewController = [[SLFTableViewController alloc] initWithStyle:UITableViewStylePlain];
     
 //    self.window.rootViewController = [[SLFLoginViewController alloc] initWithNibName:nil bundle:nil];
-    self.window.rootViewController = [[SLFSelfyViewController alloc] initWithNibName:nil bundle:nil];
+//    self.window.rootViewController = [[SLFSelfyViewController alloc] initWithNibName:nil bundle:nil];
+
+
+    UINavigationController * nav = [[UINavigationController alloc] initWithRootViewController:[[SLFLoginViewController alloc] init]];
+    self.window.rootViewController = nav;
+    nav.navigationBar.hidden = YES;
+    
+    
+
     
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];

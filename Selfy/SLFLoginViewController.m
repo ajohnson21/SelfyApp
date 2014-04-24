@@ -11,6 +11,7 @@
 
 #import "SLFLoginViewController.h"
 #import "SLFSelfyViewController.h"
+#import "SLFTableViewController.h"
 
 @interface SLFLoginViewController () <UITextFieldDelegate>
 
@@ -30,8 +31,8 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self)
     {
-        
         loginForm = [[UIView alloc] initWithFrame:self.view.frame];
+        loginForm.backgroundColor = [UIColor lightGrayColor];
         [self.view addSubview:loginForm];
         
         
@@ -113,6 +114,11 @@
     user.password = password.text;
     
     [user saveInBackground];
+    
+    UIViewController *  tvc = [[SLFTableViewController alloc] init];
+    
+    [[self navigationController] pushViewController:tvc animated:YES];
+
     
     NSLog(@"testing submit button");
 }
