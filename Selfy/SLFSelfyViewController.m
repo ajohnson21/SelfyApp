@@ -7,6 +7,7 @@
 //
 
 #import "SLFSelfyViewController.h"
+#import "SLFTableViewController.h"
 
 @interface SLFSelfyViewController () <UITextViewDelegate>
 
@@ -97,12 +98,20 @@
     return YES;
 }
 
--(void)cancelButton2
-{
-    //
-}
 -(void)cancelNewSelfy
 {
+    SLFTableViewController * cancelView = [[SLFTableViewController alloc] initWithNibName:nil bundle:nil];
+//    [self.navigationController pushViewController:cancelView animated:YES];
+    
+    UINavigationController * nc = [[UINavigationController alloc] initWithRootViewController:cancelView];
+    
+    nc.navigationBar.barTintColor = [UIColor colorWithRed:0.137f green:0.627f blue:0.906f alpha:1.0];
+    nc.navigationBar.translucent = NO;
+    
+    [self.navigationController presentViewController:nc animated:YES completion:^{
+        
+    }];
+
     
 }
 
@@ -115,7 +124,8 @@
     
     cancelNewSelfy.tintColor = [UIColor whiteColor];
     self.navigationItem.rightBarButtonItem = cancelNewSelfy;
-    [self setNeedsStatusBarAppearanceUpdate];
+[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    
 }
 
 - (void)didReceiveMemoryWarning
