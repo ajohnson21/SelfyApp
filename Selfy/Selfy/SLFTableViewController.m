@@ -12,7 +12,7 @@
 #import "SLFTableViewCell.h"
 #import "SLFSelfyViewController.h"
 
-@interface SLFTableViewController () 
+@interface SLFTableViewController ()
 
 @end
 
@@ -23,7 +23,7 @@
     UIButton * settingsButton;
     UIButton * addNewButton;
     NSMutableArray *selfyList;
-
+    
 }
 
 - (id)initWithStyle:(UITableViewStyle)style
@@ -34,22 +34,22 @@
         
         
         selfyList=  [@[
-                              @{
-                                @"selfImage":@"http://www.cwu.edu/~helmersk/pirateimage.jpg",
-                                @"caption":@"It's a ship!",
-                                @"userID":@"ajohnson21",
-                                @"avatar":@"http://www.clipartbest.com/cliparts/pi5/6ap/pi56apLiB.jpeg",
-                                @"selfyID":@""
-                                 
-                                }
-                              
-                              ] mutableCopy];
+                       @{
+                           @"selfImage":@"http://www.cwu.edu/~helmersk/pirateimage.jpg",
+                           @"caption":@"It's a ship!",
+                           @"userID":@"ajohnson21",
+                           @"avatar":@"http://www.clipartbest.com/cliparts/pi5/6ap/pi56apLiB.jpeg",
+                           @"selfyID":@""
+                           
+                           }
+                       
+                       ] mutableCopy];
         
         
         
         
         self.tableView.rowHeight = self.tableView.frame.size.width + 100;
-
+        
         
         header = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 60)];
         header.backgroundColor  = [UIColor whiteColor];
@@ -61,26 +61,6 @@
         titleHeader.font = [UIFont fontWithName:@"HoeflerText-Italic" size:30];
         [self.view addSubview:titleHeader];
         
-//        settingsButton = [UIButton buttonWithType:UIButtonTypeInfoDark];
-//        [settingsButton setFrame:CGRectMake(20, 25, 60, 20)];
-//        settingsButton = [[UIButton alloc] initWithFrame:CGRectMake(20, 25, 60, 20)];
-//        [settingsButton setTitle:@"Settings" forState:UIControlStateNormal];
-//        [settingsButton addTarget:self action:@selector(settings) forControlEvents: UIControlEventTouchUpInside];
-//        settingsButton.backgroundColor = [UIColor blackColor];
-//        settingsButton.layer.cornerRadius = 6;
-//        settingsButton.titleLabel.font = [UIFont boldSystemFontOfSize:12];
-//        [settingsButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-//        [self.view addSubview:settingsButton];
-        
-//        addNewButton = [UIButton buttonWithType:UIButtonTypeContactAdd];
-//        [addNewButton  setFrame:CGRectMake(280, 25, 20, 20)];
-//        [addNewButton setTitle:@"Add New" forState:UIControlStateNormal];
-//        [addNewButton addTarget:self action:@selector(addNew) forControlEvents: UIControlEventTouchUpInside];
-//        addNewButton.backgroundColor = [UIColor blackColor];
-//        addNewButton.layer.cornerRadius = 6;
-//        addNewButton.titleLabel.font = [UIFont boldSystemFontOfSize:12];
-//        [addNewButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-//        [self.view addSubview:addNewButton];
     }
     return self;
 }
@@ -91,9 +71,19 @@
     //
 }
 
--(void)addNew
+-(void)openNewSelfy
 {
-    //
+    SLFSelfyViewController * moveView = [[SLFSelfyViewController alloc] initWithNibName:nil bundle:nil];
+    
+    UINavigationController * nc = [[UINavigationController alloc] initWithRootViewController:moveView];
+    
+    nc.navigationBar.barTintColor = [UIColor colorWithRed:0.137f green:0.627f blue:0.906f alpha:1.0];
+    nc.navigationBar.translucent = NO;
+    
+    [self.navigationController presentViewController:nc animated:YES completion:^{
+        
+    }];
+    
 }
 
 - (void)viewDidLoad
@@ -118,7 +108,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    NSLog(@"ooooh numRows returning %d", (int)[selfyList count]);
+    NSLog(@"numRows returning %d", (int)[selfyList count]);
     return [selfyList count];
 }
 
@@ -127,10 +117,10 @@
     SLFTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"]; //forIndexPath:indexPath];
     
     // Configure the cell...
-
+    
     if (cell == nil) cell = [[SLFTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
     
-    cell.selfyInfo = selfyList[indexPath.row];    
+    cell.selfyInfo = selfyList[indexPath.row];
     
     return cell;
 }

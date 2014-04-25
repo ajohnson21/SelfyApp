@@ -29,6 +29,8 @@
     if (self) {
         // Custom initialization
         
+        self.view.backgroundColor = [UIColor whiteColor];
+        
         newForm = [[UIView alloc] initWithFrame:self.view.frame];
         [self.view addSubview:newForm];
         
@@ -39,7 +41,7 @@
         [newForm addSubview:titleHeader];
         
         selfyImage = [[UIImageView alloc] initWithFrame:CGRectMake(30, 100, 260, 200)];
-        selfyImage.backgroundColor = [UIColor grayColor];
+        selfyImage.backgroundColor = [UIColor colorWithWhite:0.9 alpha:1.0];
         selfyImage.contentMode = UIViewContentModeScaleAspectFit;
         [newForm addSubview:selfyImage];
         
@@ -58,15 +60,6 @@
         submitButton.titleLabel.font = [UIFont boldSystemFontOfSize:12];
         [submitButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [newForm addSubview:submitButton];
-        
-        cancelButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        cancelButton = [[UIButton alloc] initWithFrame:CGRectMake(280, 25, 20, 20)];
-        [cancelButton setTitle:@"X" forState:UIControlStateNormal];
-        [cancelButton addTarget:self action:@selector(cancelButton2) forControlEvents:UIControlEventTouchUpInside];
-        cancelButton.backgroundColor = [UIColor clearColor];
-        cancelButton.titleLabel.font = [UIFont boldSystemFontOfSize:12];
-        [cancelButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        [newForm addSubview:cancelButton];
         
         UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapScreen)];
         [self.view addGestureRecognizer:tap];
@@ -102,35 +95,38 @@
     }];
     
     return YES;
- }
+}
 
-     -(void)cancelButton2
-     {
-         //
-     }
-     
-         
-     - (void)viewDidLoad
-     {
-         [super viewDidLoad];
-         // Do any additional setup after loading the view.
-     }
-     
-     - (void)didReceiveMemoryWarning
-     {
-         [super didReceiveMemoryWarning];
-         // Dispose of any resources that can be recreated.
-     }
-     
-     /*
-      #pragma mark - Navigation
-      
-      // In a storyboard-based application, you will often want to do a little preparation before navigation
-      - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-      {
-      // Get the new view controller using [segue destinationViewController].
-      // Pass the selected object to the new view controller.
-      }
-      */
-     
-     @end
+-(void)cancelButton2
+{
+    //
+}
+-(void)cancelNewSelfy
+{
+    
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    // Do any additional setup after loading the view.
+    
+    UIBarButtonItem * cancelNewSelfy = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop target:self action:@selector (cancelNewSelfy)];
+    
+    cancelNewSelfy.tintColor = [UIColor whiteColor];
+    self.navigationItem.rightBarButtonItem = cancelNewSelfy;
+    [self setNeedsStatusBarAppearanceUpdate];
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
+}
+
+@end
