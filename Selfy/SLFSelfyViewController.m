@@ -77,9 +77,14 @@
 
 -(void)submitButton
 {
-    // PFObject class name "UserSelfy"
-    // put a png file inside app
-    // PFFILE
+    UIImage * image = [UIImage imageNamed:@"ship"];
+    NSData * imageData = UIImagePNGRepresentation(image);
+    PFFile * imageFile = [PFFile fileWithName:@"ship.png" data:imageData];
+    
+    PFObject * newSelfy = [PFObject objectWithClassName:@"UserSelfy"];
+    newSelfy[@"caption"] = captionField.text;
+    newSelfy[@"image"] = imageFile;
+    [newSelfy saveInBackground];
 }
 
 -(void)tapScreen
@@ -104,11 +109,7 @@
          //
      }
      
-     -(void)submitButton
-     {
-         //
-     }
-     
+         
      - (void)viewDidLoad
      {
          [super viewDidLoad];

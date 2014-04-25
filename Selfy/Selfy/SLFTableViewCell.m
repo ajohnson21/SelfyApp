@@ -22,12 +22,12 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self)
     {
-        avatar = [[UIImageView alloc] initWithFrame:CGRectMake(20, 320, 40, 40)];
+        avatar = [[UIImageView alloc] initWithFrame:CGRectMake(20, 260, 40, 40)];
         avatar.backgroundColor = [UIColor clearColor];
         avatar.contentMode = UIViewContentModeScaleAspectFit;
         [self.contentView addSubview:avatar];
         
-        selfImage = [[UIImageView alloc] initWithFrame:CGRectMake(20, 20, 280, 280)];
+        selfImage = [[UIImageView alloc] initWithFrame:CGRectMake(60, 20, 200, 200)];
         selfImage.backgroundColor = [UIColor clearColor];
         selfImage.contentMode = UIViewContentModeScaleAspectFit;
         [self.contentView addSubview:selfImage];
@@ -38,7 +38,7 @@
 //        userID.font = [UIFont systemFontOfSize:30];
 //        [self.contentView addSubview:userID];
         
-        caption = [[UILabel alloc] initWithFrame:CGRectMake(80, 320, 220, 40)];
+        caption = [[UILabel alloc] initWithFrame:CGRectMake(80, 260, 220, 40)];
         caption.backgroundColor = [UIColor clearColor];
         caption.textColor = [UIColor darkGrayColor];
         caption.font = [UIFont systemFontOfSize:16];

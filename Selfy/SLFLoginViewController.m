@@ -48,6 +48,8 @@
         nameField.backgroundColor = [UIColor colorWithWhite:0.9 alpha:1.0];
         nameField.placeholder = @" username";
         nameField.layer.cornerRadius = 6;
+        nameField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+        nameField.autocorrectionType = UITextAutocorrectionTypeNo;
         nameField.keyboardType = UIKeyboardTypeTwitter;
         [loginForm addSubview:nameField];
         nameField.delegate = self;
@@ -107,7 +109,6 @@
 
 -(void)signInButton
 {
-    
     PFUser * user = [PFUser currentUser];
     
     user.username = nameField.text;
@@ -116,9 +117,22 @@
     nameField.text = nil;
     password.text = nil;
     
-    // uiActivityIndicatorView
-    // run method start...
-    // addsubview
+    UIActivityIndicatorView * activity = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle: UIActivityIndicatorViewStyleGray];
+    [activity setColor:[UIColor orangeColor]];
+    activity.color = [UIColor orangeColor];
+    activity.frame = CGRectMake(0, 300, self.view.frame.size.width, 50);
+    
+    [loginForm addSubview:activity];
+
+    [activity startAnimating];
+    
+    [nameField resignFirstResponder];
+    [password resignFirstResponder];
+    
+    [UIView animateWithDuration:0.2 animations:^{
+        loginForm.frame = self.view.frame;
+    }];
+
     
     [user saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error)
     {
@@ -129,11 +143,15 @@
         }
         else
         {
-//            error.userinfo[@"error"]
-//            UIAlertView with message
+            NSString * errorDescription = error.userInfo[@"error"];
+            UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"Login Error" message:errorDescription delegate:self cancelButtonTitle:@"Try Again" otherButtonTitles:nil];
+            [alertView show];
             
-            // activity indicator remove
+            [activity removeFromSuperview];
+
+            
         }
+
     }];
     
 }
@@ -142,6 +160,8 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    
 }
 
 - (void)didReceiveMemoryWarning

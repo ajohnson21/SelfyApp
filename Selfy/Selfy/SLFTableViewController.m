@@ -63,24 +63,24 @@
         
 //        settingsButton = [UIButton buttonWithType:UIButtonTypeInfoDark];
 //        [settingsButton setFrame:CGRectMake(20, 25, 60, 20)];
-        settingsButton = [[UIButton alloc] initWithFrame:CGRectMake(20, 25, 60, 20)];
-        [settingsButton setTitle:@"Settings" forState:UIControlStateNormal];
-        [settingsButton addTarget:self action:@selector(settings) forControlEvents: UIControlEventTouchUpInside];
-        settingsButton.backgroundColor = [UIColor blackColor];
-        settingsButton.layer.cornerRadius = 6;
-        settingsButton.titleLabel.font = [UIFont boldSystemFontOfSize:12];
-        [settingsButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [self.view addSubview:settingsButton];
+//        settingsButton = [[UIButton alloc] initWithFrame:CGRectMake(20, 25, 60, 20)];
+//        [settingsButton setTitle:@"Settings" forState:UIControlStateNormal];
+//        [settingsButton addTarget:self action:@selector(settings) forControlEvents: UIControlEventTouchUpInside];
+//        settingsButton.backgroundColor = [UIColor blackColor];
+//        settingsButton.layer.cornerRadius = 6;
+//        settingsButton.titleLabel.font = [UIFont boldSystemFontOfSize:12];
+//        [settingsButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+//        [self.view addSubview:settingsButton];
         
-        addNewButton = [UIButton buttonWithType:UIButtonTypeContactAdd];
-        [addNewButton  setFrame:CGRectMake(280, 25, 20, 20)];
-        [addNewButton setTitle:@"Add New" forState:UIControlStateNormal];
-        [addNewButton addTarget:self action:@selector(addNew) forControlEvents: UIControlEventTouchUpInside];
-        addNewButton.backgroundColor = [UIColor blackColor];
-        addNewButton.layer.cornerRadius = 6;
-        addNewButton.titleLabel.font = [UIFont boldSystemFontOfSize:12];
-        [addNewButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [self.view addSubview:addNewButton];
+//        addNewButton = [UIButton buttonWithType:UIButtonTypeContactAdd];
+//        [addNewButton  setFrame:CGRectMake(280, 25, 20, 20)];
+//        [addNewButton setTitle:@"Add New" forState:UIControlStateNormal];
+//        [addNewButton addTarget:self action:@selector(addNew) forControlEvents: UIControlEventTouchUpInside];
+//        addNewButton.backgroundColor = [UIColor blackColor];
+//        addNewButton.layer.cornerRadius = 6;
+//        addNewButton.titleLabel.font = [UIFont boldSystemFontOfSize:12];
+//        [addNewButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+//        [self.view addSubview:addNewButton];
     }
     return self;
 }
@@ -103,15 +103,10 @@
     self.tableView.tableFooterView = [UIView new];
     self.tableView.tableHeaderView = [UIView new];
     
+    UIBarButtonItem * addNewSelfyButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(openNewSelfy)];
+    self.navigationItem.rightBarButtonItem = addNewSelfyButton;
     
-
     
-    
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
 - (void)didReceiveMemoryWarning
