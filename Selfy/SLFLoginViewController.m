@@ -13,7 +13,7 @@
 #import "SLFSelfyViewController.h"
 #import "SLFTableViewController.h"
 
-@interface SLFLoginViewController () <UITextFieldDelegate>
+@interface SLFLoginViewController () <UITextFieldDelegate, UIAlertViewDelegate>
 
 @end
 
@@ -24,7 +24,7 @@
     UIButton * signInButton;
     UILabel *titleHeader;
     UIView * loginForm;
-    UIAlertView * alert;
+    UIActivityIndicatorView * activityIndicator;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -42,7 +42,7 @@
         titleHeader.textColor = [UIColor blackColor];
         titleHeader.font = [UIFont fontWithName:@"HoeflerText-Italic" size:30];
         [loginForm addSubview:titleHeader];
-
+        
         
         nameField = [[UITextField alloc] initWithFrame:CGRectMake(60, 200, 200, 30)];
         nameField.backgroundColor = [UIColor colorWithWhite:0.9 alpha:1.0];
@@ -70,7 +70,17 @@
         [signInButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [loginForm addSubview:signInButton];
         
-      
+        
+        activityIndicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+        activityIndicator.frame = CGRectMake(160, 240, 40, 40.);
+        activityIndicator.color = [UIColor grayColor];
+        activityIndicator.center = self.view.center;
+        [activityIndicator startAnimating];
+//        [activityIndicator release];
+        
+
+        
+        
         
         UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapScreen)];
         [self.view addGestureRecognizer:tap];
@@ -104,7 +114,6 @@
     return YES;
 }
 
-
 -(void)signInButton
 {
     
@@ -120,22 +129,35 @@
     // run method start...
     // addsubview
     
-    [user saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error)
-    {
-        if (error == nil)
-        {
-            self.navigationController.navigationBarHidden = NO;
-            self.navigationController.viewControllers = @[[[SLFTableViewController alloc] initWithStyle:UITableViewStylePlain]];
-        }
-        else
-        {
-//            error.userinfo[@"error"]
-//            UIAlertView with message
-            
-            // activity indicator remove
-        }
-    }];
+    [self.view addSubview: activityIndicator];
     
+    
+    [user saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error)
+     {
+         
+         if (error == nil)
+         {
+             
+             self.navigationController.navigationBarHidden = NO;
+             self.navigationController.viewControllers = @[[[SLFTableViewController alloc] initWithStyle:UITableViewStylePlain]];
+         }
+         else
+         {
+             UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Alert"
+                                                              message:@"Alert message" delegate:self cancelButtonTitle: @"OK"
+                                                    otherButtonTitles: nil];
+             
+             [alert show];
+             
+             [activityIndicator removeFromSuperview];
+             
+             //            error.userinfo[@"error"]
+             //            UIAlertView with message
+             
+             // activity indicator remove
+         }
+     }];
+
 }
 
 - (void)viewDidLoad

@@ -33,6 +33,7 @@
 		C804DB241906BDA00004582C /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C804DB231906BDA00004582C /* StoreKit.framework */; };
 		C804DB271906D6280004582C /* SLFLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C804DB261906D6280004582C /* SLFLoginViewController.m */; };
 		C804DB2A1906DAF40004582C /* SLFSelfyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C804DB291906DAF40004582C /* SLFSelfyViewController.m */; };
+		C804DB76190A91530004582C /* Ship.png in Resources */ = {isa = PBXBuildFile; fileRef = C804DB75190A91530004582C /* Ship.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,6 +81,7 @@
 		C804DB261906D6280004582C /* SLFLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SLFLoginViewController.m; path = ../SLFLoginViewController.m; sourceTree = "<group>"; };
 		C804DB281906DAF40004582C /* SLFSelfyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SLFSelfyViewController.h; path = ../SLFSelfyViewController.h; sourceTree = "<group>"; };
 		C804DB291906DAF40004582C /* SLFSelfyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SLFSelfyViewController.m; path = ../SLFSelfyViewController.m; sourceTree = "<group>"; };
+		C804DB75190A91530004582C /* Ship.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Ship.png; path = ../../../../Desktop/Ship.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +121,7 @@
 		C804DACA1905884E0004582C = {
 			isa = PBXGroup;
 			children = (
+				C804DB74190A91480004582C /* pictures */,
 				C804DADC1905884E0004582C /* Selfy */,
 				C804DAF51905884E0004582C /* SelfyTests */,
 				C804DAD51905884E0004582C /* Frameworks */,
@@ -204,6 +207,14 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		C804DB74190A91480004582C /* pictures */ = {
+			isa = PBXGroup;
+			children = (
+				C804DB75190A91530004582C /* Ship.png */,
+			);
+			name = pictures;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -280,6 +291,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C804DB76190A91530004582C /* Ship.png in Resources */,
 				C804DAE11905884E0004582C /* InfoPlist.strings in Resources */,
 				C804DAE91905884E0004582C /* Images.xcassets in Resources */,
 			);
@@ -510,6 +522,7 @@
 				C804DB011905884E0004582C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		C804DB021905884E0004582C /* Build configuration list for PBXNativeTarget "SelfyTests" */ = {
 			isa = XCConfigurationList;
@@ -518,6 +531,7 @@
 				C804DB041905884E0004582C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

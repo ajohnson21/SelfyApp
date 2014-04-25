@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SLFLoginViewController : UIViewController
+@interface SLFLoginViewController : UIViewController <UIAlertViewDelegate>
 
 @end
