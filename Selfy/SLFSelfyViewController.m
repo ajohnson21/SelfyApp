@@ -29,43 +29,46 @@
     if (self) {
         // Custom initialization
         
+        
         self.view.backgroundColor = [UIColor whiteColor];
         
         newForm = [[UIView alloc] initWithFrame:self.view.frame];
         [self.view addSubview:newForm];
         
-        titleHeader = [[UILabel alloc] initWithFrame:CGRectMake(100, 10, 320, 90)];
-        titleHeader.text = @"\u03a3" @"\u0395" @"\u039B" @"\u03A6" @"\u03A5";
-        titleHeader.textColor = [UIColor blackColor];
-        titleHeader.font = [UIFont fontWithName:@"HoeflerText-Italic" size:30];
-        [newForm addSubview:titleHeader];
-        
-        selfyImage = [[UIImageView alloc] initWithFrame:CGRectMake(30, 100, 260, 200)];
-        selfyImage.backgroundColor = [UIColor colorWithWhite:0.9 alpha:1.0];
-        selfyImage.contentMode = UIViewContentModeScaleAspectFit;
-        [newForm addSubview:selfyImage];
-        
-        captionField = [[UITextView alloc] initWithFrame:CGRectMake(30, 310, 260, 60)];
-        captionField.backgroundColor = [UIColor colorWithWhite:0.9 alpha:1.0];
-        captionField.text = @"";
-        captionField.delegate = self;
-        captionField.keyboardType = UIKeyboardTypeTwitter;
-        [newForm addSubview:captionField];
-        
-        submitButton = [[UIButton alloc] initWithFrame:CGRectMake(110, 380, 100, 30)];
-        [submitButton setTitle:@"Submit" forState:UIControlStateNormal];
-        [submitButton addTarget:self action:@selector(submitButton) forControlEvents: UIControlEventTouchUpInside];
-        submitButton.backgroundColor = [UIColor blackColor];
-        submitButton.layer.cornerRadius = 6;
-        submitButton.titleLabel.font = [UIFont boldSystemFontOfSize:12];
-        [submitButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [newForm addSubview:submitButton];
         
         UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapScreen)];
         [self.view addGestureRecognizer:tap];
         
     }
     return self;
+}
+
+-(void)createForm
+{
+    newForm = [[UIView alloc] initWithFrame:CGRectMake(20, 20, 280, self.view.frame.size.height - 40)];
+    [self.view addSubview:newForm];
+    
+    selfyImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 280, 220)];
+    selfyImage.backgroundColor = [UIColor colorWithWhite:0.9 alpha:1.0];
+    selfyImage.contentMode = UIViewContentModeScaleAspectFit;
+    [newForm addSubview:selfyImage];
+    
+    captionField = [[UITextView alloc] initWithFrame:CGRectMake(0, 240, 280, 80)];
+    captionField.backgroundColor = [UIColor colorWithWhite:0.9 alpha:1.0];
+    captionField.text = @"";
+    captionField.delegate = self;
+    captionField.keyboardType = UIKeyboardTypeTwitter;
+    [newForm addSubview:captionField];
+    
+    submitButton = [[UIButton alloc] initWithFrame:CGRectMake(0 ,newForm.frame.size.height - 40, 280, 40)];
+    [submitButton setTitle:@"Submit" forState:UIControlStateNormal];
+    [submitButton addTarget:self action:@selector(submitButton) forControlEvents: UIControlEventTouchUpInside];
+    submitButton.backgroundColor = [UIColor blackColor];
+    submitButton.layer.cornerRadius = 6;
+    submitButton.titleLabel.font = [UIFont boldSystemFontOfSize:12];
+    [submitButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [newForm addSubview:submitButton];
+
 }
 
 -(void)submitButton
@@ -97,19 +100,25 @@
     return YES;
 }
 
--(void)cancelButton2
+-(void)viewWillAppear:(BOOL)animated
 {
-    //
+    [super viewWillAppear:animated];
+    [self createForm];
 }
+
 -(void)cancelNewSelfy
 {
-    
+    [self.navigationController dismissViewControllerAnimated:YES completion:^{
+        
+    }];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    
     
     UIBarButtonItem * cancelNewSelfy = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop target:self action:@selector (cancelNewSelfy)];
     
@@ -124,9 +133,5 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (UIStatusBarStyle)preferredStatusBarStyle
-{
-    return UIStatusBarStyleLightContent;
-}
 
 @end

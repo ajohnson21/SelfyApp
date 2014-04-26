@@ -11,6 +11,7 @@
 #import "SLFTableViewController.h"
 #import "SLFTableViewCell.h"
 #import "SLFSelfyViewController.h"
+#import "SLFNewNavigationController.h"
 
 @interface SLFTableViewController ()
 
@@ -55,7 +56,7 @@
         header.backgroundColor  = [UIColor whiteColor];
         self.tableView.tableHeaderView = header;
         
-        titleHeader = [[UILabel alloc] initWithFrame:CGRectMake(120, 10, 320, 90)];
+        titleHeader = [[UILabel alloc] initWithFrame:CGRectMake(100, 10, 320, 40)];
         titleHeader.text = @"\u03a3" @"\u0395" @"\u039B" @"\u03A6" @"\u03A5";
         titleHeader.textColor = [UIColor blackColor];
         titleHeader.font = [UIFont fontWithName:@"HoeflerText-Italic" size:30];
@@ -75,7 +76,7 @@
 {
     SLFSelfyViewController * moveView = [[SLFSelfyViewController alloc] initWithNibName:nil bundle:nil];
     
-    UINavigationController * nc = [[UINavigationController alloc] initWithRootViewController:moveView];
+    SLFNewNavigationController * nc = [[SLFNewNavigationController alloc] initWithRootViewController:moveView];
     
     nc.navigationBar.barTintColor = [UIColor colorWithRed:0.137f green:0.627f blue:0.906f alpha:1.0];
     nc.navigationBar.translucent = NO;
