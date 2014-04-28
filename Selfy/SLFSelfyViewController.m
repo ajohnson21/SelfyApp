@@ -83,10 +83,10 @@
     PFObject * newSelfy = [PFObject objectWithClassName:@"UserSelfy"];
     newSelfy[@"caption"] = captionField.text;
     newSelfy[@"image"] = imageFile;
+    newSelfy[@"parent"] = [PFUser currentUser];
     [newSelfy saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         NSLog(@"%u",succeeded);
         [self cancelNewSelfy];
-
     }];
     
 }

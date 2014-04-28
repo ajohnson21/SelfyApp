@@ -71,7 +71,6 @@
         signInButton.titleLabel.font = [UIFont boldSystemFontOfSize:12];
         [signInButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [loginForm addSubview:signInButton];
-        
       
         
         UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapScreen)];
