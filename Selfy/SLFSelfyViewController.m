@@ -7,6 +7,7 @@
 //
 
 #import "SLFSelfyViewController.h"
+#import "SLFLoginViewController.h"
 
 @interface SLFSelfyViewController () <UITextViewDelegate>
 
@@ -81,6 +82,7 @@
     PFFile * imageFile = [PFFile fileWithName:@"image.png" data:imageData];
     
     PFObject * newSelfy = [PFObject objectWithClassName:@"UserSelfy"];
+    newSelfy[@"username"] = [PFUser currentUser];
     newSelfy[@"caption"] = captionField.text;
     newSelfy[@"image"] = imageFile;
     [newSelfy saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
