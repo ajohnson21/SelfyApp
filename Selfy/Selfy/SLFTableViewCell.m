@@ -8,6 +8,7 @@
 
 #import "SLFTableViewCell.h"
 
+
 @implementation SLFTableViewCell
 {
     UIImageView * avatar;
@@ -32,12 +33,6 @@
         selfImage.contentMode = UIViewContentModeScaleAspectFit;
         [self.contentView addSubview:selfImage];
         
-//        userID = [[UILabel alloc] initWithFrame:CGRectMake(100, 50, 200, 30)];
-//        userID.backgroundColor = [UIColor clearColor];
-//        userID.textColor = [UIColor blackColor];
-//        userID.font = [UIFont systemFontOfSize:30];
-//        [self.contentView addSubview:userID];
-        
         caption = [[UILabel alloc] initWithFrame:CGRectMake(80, 260, 220, 40)];
         caption.backgroundColor = [UIColor clearColor];
         caption.textColor = [UIColor darkGrayColor];
@@ -47,21 +42,37 @@
     return self;
 }
 
-- (void)setSelfyInfo:(NSDictionary *)selfyInfo
+- (void)setSelfyInfo:(PFObject *)selfyInfo
 {
     // Trying to set the visual avatar image on our screen (little one next to caption)
-    NSURL* avatarURL = [NSURL URLWithString:selfyInfo[@"avatar"]];
-    NSData* avatarData = [NSData dataWithContentsOfURL:avatarURL];
-    avatar.image = [UIImage imageWithData:avatarData];
+//    NSURL* avatarURL = [NSURL URLWithString:selfyInfo[@"avatar"]];
+//    NSData* avatarData = [NSData dataWithContentsOfURL:avatarURL];
+//    avatar.image = [UIImage imageWithData:avatarData];
     //self.selfyInfo[@"avatar"] = [UIImage imageWithData:imageData];
     
     // Trying to set the visual PHOTO image on our screen (big one)
-    NSURL* imageURL = [NSURL URLWithString:selfyInfo[@"selfImage"]];
-    NSData* imageData = [NSData dataWithContentsOfURL:imageURL];
-    selfImage.image = [UIImage imageWithData:imageData];
+//    NSURL* imageURL = [NSURL URLWithString:selfyInfo[@"selfImage"]];
+//    NSData* imageData = [NSData dataWithContentsOfURL:imageURL];
+//    selfImage.image = [UIImage imageWithData:imageData];
     
-    caption.text = selfyInfo[@"caption"];
-    userID.text = selfyInfo[@"userID"];
+    PFFile * imageFile = [selfyInfo objectForKey:@"image"];
+    [imageFile getDataInBackgroundWithBlock:^(NSData *data, NSError *error)
+    {
+        UIImage * image = [UIImage imageWithData:data];
+        selfImage.image = image;
+        
+    }
+    progressBlock:^(int percentDone)
+    {
+        //
+    
+    }];
+    
+    
+    
+    
+//    caption.text = selfyInfo[@"caption"];
+    caption.text = [selfyInfo objectForKey:@"caption"];
     
     
     _selfyInfo = selfyInfo;

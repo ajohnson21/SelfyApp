@@ -23,7 +23,7 @@
     UILabel * titleHeader;
     UIButton * settingsButton;
     UIButton * addNewButton;
-    NSMutableArray *selfyList;
+    NSArray *selfyList;
     
 }
 
@@ -34,20 +34,8 @@
         // Custom initialization
         
         
-        selfyList=  [@[
-                       @{
-                           @"selfImage":@"http://www.cwu.edu/~helmersk/pirateimage.jpg",
-                           @"caption":@"It's a ship!",
-                           @"userID":@"ajohnson21",
-                           @"avatar":@"http://www.clipartbest.com/cliparts/pi5/6ap/pi56apLiB.jpeg",
-                           @"selfyID":@""
-                           
-                           }
-                       
-                       ] mutableCopy];
-        
-        
-        
+        selfyList=  @[];
+                
         
         self.tableView.rowHeight = self.tableView.frame.size.width + 100;
         
@@ -100,16 +88,35 @@
     
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [self refreshSelfies];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
+-(void)refreshSelfies
+{
+    // change order by created date: newest first
+    
+    // after user connected to selfy : filter only your users selfies
+    
+    PFQuery * query = [PFQuery queryWithClassName:@"UserSelfy"];
+    
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        
+        selfyList = objects;
+        [self.tableView reloadData];
+        
+    }];
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    // Return the number of rows in the section.
-    NSLog(@"numRows returning %d", (int)[selfyList count]);
     return [selfyList count];
 }
 

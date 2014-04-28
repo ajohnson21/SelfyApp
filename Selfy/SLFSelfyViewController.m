@@ -45,11 +45,13 @@
 
 -(void)createForm
 {
+    
     newForm = [[UIView alloc] initWithFrame:CGRectMake(20, 20, 280, self.view.frame.size.height - 40)];
     [self.view addSubview:newForm];
     
     selfyImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 280, 220)];
-    selfyImage.backgroundColor = [UIColor colorWithWhite:0.9 alpha:1.0];
+    selfyImage.backgroundColor = [UIColor whiteColor];
+    selfyImage.image = [UIImage imageNamed:@"boss"];
     selfyImage.contentMode = UIViewContentModeScaleAspectFit;
     [newForm addSubview:selfyImage];
     
@@ -73,30 +75,36 @@
 
 -(void)submitButton
 {
-    UIImage * image = [UIImage imageNamed:@"ship"];
-    NSData * imageData = UIImagePNGRepresentation(image);
-    PFFile * imageFile = [PFFile fileWithName:@"ship.png" data:imageData];
+    // connect current user to submitButton as parent : Parse "relational data"
+    
+    NSData * imageData = UIImagePNGRepresentation(selfyImage.image);
+    PFFile * imageFile = [PFFile fileWithName:@"image.png" data:imageData];
     
     PFObject * newSelfy = [PFObject objectWithClassName:@"UserSelfy"];
     newSelfy[@"caption"] = captionField.text;
     newSelfy[@"image"] = imageFile;
-    [newSelfy saveInBackground];
+    [newSelfy saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        NSLog(@"%u",succeeded);
+        [self cancelNewSelfy];
+
+    }];
+    
 }
 
 -(void)tapScreen
 {
     [captionField resignFirstResponder];
     [UIView animateWithDuration:0.2 animations:^{
-        newForm.frame = self.view.frame;
+        newForm.frame = CGRectMake(20, 20, 280, self.view.frame.size.height - 40);
     }];
 }
 
 -(BOOL)textViewShouldBeginEditing:(UITextView *)textView
 {
     [UIView animateWithDuration:0.2 animations:^{
-        newForm.frame = CGRectMake(0, -KB_HEIGHT, 320, self.view.frame.size.height);
+        newForm.frame = CGRectMake(20, (20 - KB_HEIGHT), 280, self.view.frame.size.height - 40);
     }];
-    
+
     return YES;
 }
 
