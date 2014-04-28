@@ -9,6 +9,16 @@
 #import <UIKit/UIKit.h>
 #import <Parse/Parse.h>
 
-@interface SLFSelfyViewController : UIViewController
+@interface SLFSelfyViewController : UIViewController <UITableViewDelegate>
+{
+    NSArray * imageArray;
+}
+
+@property (nonatomic) IBOutlet UITableView * imageTable;
 
 @end
+
+
+
+
+

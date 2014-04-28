@@ -8,5 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SLFTableViewController : UITableViewController 
+@interface SLFTableViewController : UITableViewController <UITableViewDelegate>
+{
+    NSArray * imageArray;
+    
+    
+}
 @end

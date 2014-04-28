@@ -27,16 +27,10 @@
         avatar.contentMode = UIViewContentModeScaleAspectFit;
         [self.contentView addSubview:avatar];
         
-        selfImage = [[UIImageView alloc] initWithFrame:CGRectMake(60, 20, 200, 200)];
+        selfImage = [[UIImageView alloc] initWithFrame:CGRectMake(60, 20, 240, 240)];
         selfImage.backgroundColor = [UIColor clearColor];
         selfImage.contentMode = UIViewContentModeScaleAspectFit;
         [self.contentView addSubview:selfImage];
-        
-//        userID = [[UILabel alloc] initWithFrame:CGRectMake(100, 50, 200, 30)];
-//        userID.backgroundColor = [UIColor clearColor];
-//        userID.textColor = [UIColor blackColor];
-//        userID.font = [UIFont systemFontOfSize:30];
-//        [self.contentView addSubview:userID];
         
         caption = [[UILabel alloc] initWithFrame:CGRectMake(80, 260, 220, 40)];
         caption.backgroundColor = [UIColor clearColor];

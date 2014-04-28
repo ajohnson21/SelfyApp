@@ -7,6 +7,7 @@
 //
 
 #import "SLFSelfyViewController.h"
+#import "SLFTableViewController.h"
 
 @interface SLFSelfyViewController () <UITextViewDelegate>
 
@@ -22,6 +23,8 @@
     UIView * newForm;
     
 }
+
+@synthesize imageTable;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -48,8 +51,15 @@
     newForm = [[UIView alloc] initWithFrame:CGRectMake(20, 20, 280, self.view.frame.size.height - 40)];
     [self.view addSubview:newForm];
     
-    selfyImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 280, 220)];
+//    selfyImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 280, 220)];
+//    selfyImage.backgroundColor = [UIColor colorWithWhite:0.9 alpha:1.0];
+//    [selfyImage setImage:[UIImage imageNamed:@"movie_reel.png"]];
+//    selfyImage.contentMode = UIViewContentModeScaleAspectFit;
+//    [newForm addSubview:selfyImage];
+    
+    selfyImage = [[PFImageView alloc] initWithFrame:CGRectMake(0, 0, 280, 220)];
     selfyImage.backgroundColor = [UIColor colorWithWhite:0.9 alpha:1.0];
+    [selfyImage setImage:[UIImage imageNamed:@"movie_reel.png"]];
     selfyImage.contentMode = UIViewContentModeScaleAspectFit;
     [newForm addSubview:selfyImage];
     
@@ -73,15 +83,45 @@
 
 -(void)submitButton
 {
-    UIImage * image = [UIImage imageNamed:@"ship"];
+
+    UIImage * image = [UIImage imageNamed:@"movie_reel.png"];
     NSData * imageData = UIImagePNGRepresentation(image);
-    PFFile * imageFile = [PFFile fileWithName:@"ship.png" data:imageData];
-    
+    PFFile * imageFile = [PFFile fileWithName:@"movie_reel.png" data:imageData];
+
     PFObject * newSelfy = [PFObject objectWithClassName:@"UserSelfy"];
     newSelfy[@"caption"] = captionField.text;
     newSelfy[@"image"] = imageFile;
     [newSelfy saveInBackground];
+    
+    PFQuery * query = [PFQuery queryWithClassName:@"UserSelfy"];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        NSLog(@"%@", objects);
+        NSLog(@"testing");
+        if (!error) {
+            imageArray = [[NSArray alloc] initWithArray:objects];
+        }
+        [imageTable reloadData];
+    }];
+    
+    [self.navigationController dismissViewControllerAnimated:YES completion:^{
+        
+    }];
 }
+
+-(void)retrieveFromParse
+{
+
+//    PFQuery * query = [PFQuery queryWithClassName:@"UserSelfy"];
+//    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+////        NSLog(@"%@", objects);
+//        NSLog(@"testing");
+//        if (!error) {
+//            imageArray = [[NSArray alloc] initWithArray:objects];
+//        }
+//        [imageTable reloadData];
+//    }];
+}
+
 
 -(void)tapScreen
 {
@@ -118,7 +158,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    
+//    [self performSelector:@selector(submitButton)];
     
     UIBarButtonItem * cancelNewSelfy = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop target:self action:@selector (cancelNewSelfy)];
     

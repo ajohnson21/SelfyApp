@@ -36,8 +36,8 @@
         
         selfyList=  [@[
                        @{
-                           @"selfImage":@"http://www.cwu.edu/~helmersk/pirateimage.jpg",
-                           @"caption":@"It's a ship!",
+                           @"selfImage":@"movie_reel.png",
+                           @"caption":@"",
                            @"userID":@"ajohnson21",
                            @"avatar":@"http://www.clipartbest.com/cliparts/pi5/6ap/pi56apLiB.jpeg",
                            @"selfyID":@""
@@ -121,7 +121,15 @@
     
     if (cell == nil) cell = [[SLFTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
     
-    cell.selfyInfo = selfyList[indexPath.row];
+    PFObject * myObject = [imageArray objectAtIndex:indexPath.row];
+    
+   
+    cell.selfyInfo = [myObject objectForKey:@"selfImage"];
+    
+    
+    
+//    cell.selfyInfo = [myObject objectForKey:imageArray];
+    
     
     return cell;
 }
