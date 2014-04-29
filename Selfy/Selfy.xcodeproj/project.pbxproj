@@ -35,6 +35,7 @@
 		C804DB2A1906DAF40004582C /* SLFSelfyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C804DB291906DAF40004582C /* SLFSelfyViewController.m */; };
 		C804DB79190AEB790004582C /* SLFNewNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = C804DB78190AEB790004582C /* SLFNewNavigationController.m */; };
 		C8AF5049190E910000C911B7 /* boss.png in Resources */ = {isa = PBXBuildFile; fileRef = C8AF5048190E910000C911B7 /* boss.png */; };
+		C8AF504C190FDD1400C911B7 /* SLFSignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C8AF504B190FDD1400C911B7 /* SLFSignUpViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,6 +86,8 @@
 		C804DB77190AEB790004582C /* SLFNewNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLFNewNavigationController.h; sourceTree = "<group>"; };
 		C804DB78190AEB790004582C /* SLFNewNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLFNewNavigationController.m; sourceTree = "<group>"; };
 		C8AF5048190E910000C911B7 /* boss.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = boss.png; path = ../../../../../Desktop/boss.png; sourceTree = "<group>"; };
+		C8AF504A190FDD1400C911B7 /* SLFSignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SLFSignUpViewController.h; path = ../SLFSignUpViewController.h; sourceTree = "<group>"; };
+		C8AF504B190FDD1400C911B7 /* SLFSignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SLFSignUpViewController.m; path = ../SLFSignUpViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -172,6 +175,8 @@
 				C804DB261906D6280004582C /* SLFLoginViewController.m */,
 				C804DB281906DAF40004582C /* SLFSelfyViewController.h */,
 				C804DB291906DAF40004582C /* SLFSelfyViewController.m */,
+				C8AF504A190FDD1400C911B7 /* SLFSignUpViewController.h */,
+				C8AF504B190FDD1400C911B7 /* SLFSignUpViewController.m */,
 				C804DB0E1905A3A30004582C /* SLFTableViewCell.h */,
 				C804DB0F1905A3A30004582C /* SLFTableViewCell.m */,
 				C804DB77190AEB790004582C /* SLFNewNavigationController.h */,
@@ -315,6 +320,7 @@
 				C804DAE31905884E0004582C /* main.m in Sources */,
 				C804DB07190588E50004582C /* SLFTableViewController.m in Sources */,
 				C804DB2A1906DAF40004582C /* SLFSelfyViewController.m in Sources */,
+				C8AF504C190FDD1400C911B7 /* SLFSignUpViewController.m in Sources */,
 				C804DB271906D6280004582C /* SLFLoginViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

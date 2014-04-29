@@ -12,6 +12,8 @@
 #import "SLFLoginViewController.h"
 #import "SLFSelfyViewController.h"
 #import "SLFTableViewController.h"
+#import "SLFSignUpViewController.h"
+#import "SLFNewNavigationController.h"
 
 @interface SLFLoginViewController () <UITextFieldDelegate>
 
@@ -25,6 +27,7 @@
     UILabel *titleHeader;
     UIView * loginForm;
     UIAlertView * alert;
+    UIButton * signUpButton;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -44,7 +47,7 @@
         [loginForm addSubview:titleHeader];
 
         
-        nameField = [[UITextField alloc] initWithFrame:CGRectMake(60, 200, 200, 30)];
+        nameField = [[UITextField alloc] initWithFrame:CGRectMake(60, 200, 200, 40)];
         nameField.backgroundColor = [UIColor colorWithWhite:0.9 alpha:1.0];
         nameField.placeholder = @" username";
         nameField.layer.cornerRadius = 6;
@@ -54,7 +57,7 @@
         [loginForm addSubview:nameField];
         nameField.delegate = self;
         
-        password = [[UITextField alloc] initWithFrame:CGRectMake(60, 240, 200, 30)];
+        password = [[UITextField alloc] initWithFrame:CGRectMake(60, 250, 200, 40)];
         password.backgroundColor = [UIColor colorWithWhite:0.9 alpha:1.0];
         password.secureTextEntry = YES;
         password.placeholder = @" password";
@@ -63,15 +66,23 @@
         [loginForm addSubview:password];
         password.delegate = self;
         
-        signInButton = [[UIButton alloc] initWithFrame:CGRectMake(110, 280, 100, 30)];
+        signInButton = [[UIButton alloc] initWithFrame:CGRectMake(60, 300, 200, 40)];
         [signInButton setTitle:@"Sign In" forState:UIControlStateNormal];
         [signInButton addTarget:self action:@selector(signInButton) forControlEvents: UIControlEventTouchUpInside];
-        signInButton.backgroundColor = [UIColor clearColor];
+        signInButton.backgroundColor = [UIColor blueColor];
         signInButton.layer.cornerRadius = 6;
         signInButton.titleLabel.font = [UIFont boldSystemFontOfSize:12];
         [signInButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [loginForm addSubview:signInButton];
-      
+        
+        signUpButton = [[UIButton alloc] initWithFrame:CGRectMake(60, 350, 200, 40)];
+        [signUpButton setTitle:@"Sign Up" forState:UIControlStateNormal];
+        [signUpButton addTarget:self action:@selector(showSignUp) forControlEvents: UIControlEventTouchUpInside];
+        signUpButton.backgroundColor = [UIColor lightGrayColor];
+        signUpButton.layer.cornerRadius = 6;
+        signUpButton.titleLabel.font = [UIFont boldSystemFontOfSize:12];
+        [signUpButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [loginForm addSubview:signUpButton];
         
         UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapScreen)];
         [self.view addGestureRecognizer:tap];
@@ -79,6 +90,20 @@
         
     }
     return self;
+}
+
+-(void)showSignUp
+{
+    SLFSignUpViewController * signUpVC = [[SLFSignUpViewController alloc] initWithNibName:nil bundle:nil];
+    
+    SLFNewNavigationController * nc = [[SLFNewNavigationController alloc] initWithRootViewController:signUpVC];
+    
+    nc.navigationBar.barTintColor = [UIColor colorWithRed:0.137f green:0.627f blue:0.906f alpha:1.0];
+    nc.navigationBar.translucent = NO;
+    
+    [self.navigationController presentViewController:nc animated:YES completion:^{
+        
+    }];
 }
 
 -(void)tapScreen
@@ -108,13 +133,7 @@
 
 -(void)signInButton
 {
-    PFUser * user = [PFUser currentUser];
-    
-    user.username = nameField.text;
-    user.password = password.text;
-    
-    nameField.text = nil;
-    password.text = nil;
+    [self hideKeyboard];
     
     UIActivityIndicatorView * activity = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle: UIActivityIndicatorViewStyleGray];
     [activity setColor:[UIColor orangeColor]];
@@ -132,9 +151,11 @@
         loginForm.frame = self.view.frame;
     }];
 
-    
-    [user saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error)
-    {
+        [PFUser logInWithUsernameInBackground:nameField.text password:password.text block:^(PFUser *user, NSError *error) {
+        
+//            NSLog(@"logged in", user.username);
+//            NSLog(@"current user %@", [PFUser currentUser].username);
+            
         if (error == nil)
         {
             self.navigationController.navigationBarHidden = NO;
@@ -142,7 +163,10 @@
         }
         else
         {
+            password.text = nil;
+            
             NSString * errorDescription = error.userInfo[@"error"];
+            
             UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"Login Error" message:errorDescription delegate:self cancelButtonTitle:@"Try Again" otherButtonTitles:nil];
             [alertView show];
             
@@ -153,6 +177,12 @@
 
     }];
     
+}
+
+-(void)hideKeyboard
+{
+    [nameField resignFirstResponder];
+    [password resignFirstResponder];
 }
 
 - (void)viewDidLoad
