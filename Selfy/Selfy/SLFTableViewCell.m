@@ -45,10 +45,10 @@
 - (void)setSelfyInfo:(PFObject *)selfyInfo
 {
     // Trying to set the visual avatar image on our screen (little one next to caption)
-//    NSURL* avatarURL = [NSURL URLWithString:selfyInfo[@"avatar"]];
-//    NSData* avatarData = [NSData dataWithContentsOfURL:avatarURL];
-//    avatar.image = [UIImage imageWithData:avatarData];
-    //self.selfyInfo[@"avatar"] = [UIImage imageWithData:imageData];
+    NSURL* avatarURL = [NSURL URLWithString:selfyInfo[@"avatar"]];
+    NSData* avatarData = [NSData dataWithContentsOfURL:avatarURL];
+    avatar.image = [UIImage imageWithData:avatarData];
+//    self.selfyInfo[@"avatar"] = [UIImage imageWithData:imageData];
     
     // Trying to set the visual PHOTO image on our screen (big one)
 //    NSURL* imageURL = [NSURL URLWithString:selfyInfo[@"selfImage"]];
