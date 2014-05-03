@@ -12,6 +12,8 @@
 #import "SLFTableViewCell.h"
 #import "SLFSelfyViewController.h"
 #import "SLFNewNavigationController.h"
+#import "SLFSettingsViewController.h"
+#import "SLFSettingsButton.h"
 
 @interface SLFTableViewController ()
 
@@ -21,10 +23,12 @@
 {
     UIView * header;
     UILabel * titleHeader;
-    UIButton * settingsButton;
     UIButton * addNewButton;
     NSArray *selfyList;
     
+    SLFSettingsButton * settingsButtonView;
+    SLFSettingsViewController * settingsVC;
+
 }
 
 - (id)initWithStyle:(UITableViewStyle)style
@@ -83,9 +87,50 @@
     self.tableView.tableHeaderView = [UIView new];
     
     UIBarButtonItem * addNewSelfyButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(openNewSelfy)];
+    addNewSelfyButton.tintColor = [UIColor colorWithRed:0.137f green:0.627f blue:0.906f alpha:1.0];
     self.navigationItem.rightBarButtonItem = addNewSelfyButton;
     
+    settingsButtonView = [[SLFSettingsButton alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
+    settingsButtonView.tintColor = [UIColor colorWithRed:0.137f green:0.627f blue:0.906f alpha:1.0];
+    settingsButtonView.toggledTintColor = [UIColor redColor];
     
+    UIBarButtonItem * settingsButton = [[UIBarButtonItem alloc] initWithCustomView:settingsButtonView];
+    self.navigationItem.leftBarButtonItem = settingsButton;
+    [settingsButtonView addTarget:self action:@selector(openSettings) forControlEvents:UIControlEventTouchUpInside];
+
+    
+}
+
+-(void)openSettings
+{
+    [settingsButtonView toggle];
+//    settingsButtonView.toggled = ![settingsButtonView isToggled];
+
+    int X = [settingsButtonView isToggled] ? SCREEN_WIDTH - 52 : 0;
+    
+    [UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        
+        self.navigationController.view.frame = CGRectMake(X, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+        
+    } completion:^(BOOL finished) {
+        
+        if (![settingsButtonView isToggled])
+        {
+            [settingsVC.view removeFromSuperview];
+        }
+        
+    }];
+    
+    if ([settingsButtonView isToggled])
+    {
+        if (settingsVC == nil) settingsVC = [[SLFSettingsViewController alloc] initWithNibName:nil bundle:nil];
+        
+        settingsVC.view.frame = CGRectMake(52 - SCREEN_WIDTH, 0, SCREEN_WIDTH - 52, SCREEN_HEIGHT);
+        
+        [self.navigationController.view addSubview:settingsVC.view];
+        [self.navigationController addChildViewController:settingsVC];
+    }
+     
 }
 
 - (void)viewWillAppear:(BOOL)animated

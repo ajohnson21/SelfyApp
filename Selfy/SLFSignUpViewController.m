@@ -17,7 +17,6 @@
 @implementation SLFSignUpViewController
 {
     UIView * signUpForm;
-    UIImageView * avatar;
     NSArray * fieldNames;
     NSMutableArray * fields;
     
@@ -81,7 +80,7 @@
     
     UIButton * submitButton = [[UIButton alloc] initWithFrame:CGRectMake(0, [fieldNames count] * 50, 280, 40)];
     [submitButton setTitle:@"Sign Up" forState:UIControlStateNormal];
-//    [submitButton addTarget:self action:@selector(signUp) forControlEvents: UIControlEventTouchUpInside];
+    [submitButton addTarget:self action:@selector(signUp) forControlEvents: UIControlEventTouchUpInside];
     submitButton.backgroundColor = [UIColor greenColor];
     submitButton.layer.cornerRadius = 6;
     [signUpForm addSubview:submitButton];
@@ -93,11 +92,20 @@
 
 -(void)signUp
 {
+    
+    
     PFUser * user = [PFUser user];
+    
+    UIImage * avatarImage = [UIImage imageNamed:@"boss"];
+    
+    NSData * imageData = UIImagePNGRepresentation(avatarImage);
+    PFFile * imageFile = [PFFile fileWithName:@"avatar.png" data:imageData];
+    
     user.username = ((UITextField *)fields[0]).text;
     user.password = ((UITextField *)fields[1]).text;
     user.email = ((UITextField *)fields[3]).text;
     user[@"displayName"] = ((UITextField *)fields[2]).text;
+    user[@"avatar"] = imageFile;
     
     [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (error == nil)
@@ -129,7 +137,7 @@
 //    NSInteger index = [fields indexOfObject:textField];
 //    
 //   int extraSlide = index * 25 + 65;
-    NSLog(@"%.00f", self.view.frame.size.height);
+//    NSLog(@"%.00f", self.view.frame.size.height);
     
     // 504 h for 4"
     // 416 h for 3.5"
@@ -149,6 +157,8 @@
     
     [UIView animateWithDuration:0.3 animations:^{
         signUpForm.frame = CGRectMake(20, signupOrigY - extraSlide, 280, 240);
+        
+        
     }];
 }
 

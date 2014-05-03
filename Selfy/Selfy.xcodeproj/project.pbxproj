@@ -36,6 +36,8 @@
 		C804DB79190AEB790004582C /* SLFNewNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = C804DB78190AEB790004582C /* SLFNewNavigationController.m */; };
 		C8AF5049190E910000C911B7 /* boss.png in Resources */ = {isa = PBXBuildFile; fileRef = C8AF5048190E910000C911B7 /* boss.png */; };
 		C8AF504C190FDD1400C911B7 /* SLFSignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C8AF504B190FDD1400C911B7 /* SLFSignUpViewController.m */; };
+		C8AF50A219112E6A00C911B7 /* SLFSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C8AF50A119112E6A00C911B7 /* SLFSettingsViewController.m */; };
+		C8AF50A519112E8700C911B7 /* SLFSettingsButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C8AF50A419112E8700C911B7 /* SLFSettingsButton.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -88,6 +90,10 @@
 		C8AF5048190E910000C911B7 /* boss.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = boss.png; path = ../../../../../Desktop/boss.png; sourceTree = "<group>"; };
 		C8AF504A190FDD1400C911B7 /* SLFSignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SLFSignUpViewController.h; path = ../SLFSignUpViewController.h; sourceTree = "<group>"; };
 		C8AF504B190FDD1400C911B7 /* SLFSignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SLFSignUpViewController.m; path = ../SLFSignUpViewController.m; sourceTree = "<group>"; };
+		C8AF50A019112E6A00C911B7 /* SLFSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLFSettingsViewController.h; sourceTree = "<group>"; };
+		C8AF50A119112E6A00C911B7 /* SLFSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLFSettingsViewController.m; sourceTree = "<group>"; };
+		C8AF50A319112E8700C911B7 /* SLFSettingsButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLFSettingsButton.h; sourceTree = "<group>"; };
+		C8AF50A419112E8700C911B7 /* SLFSettingsButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLFSettingsButton.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +133,10 @@
 		C804DACA1905884E0004582C = {
 			isa = PBXGroup;
 			children = (
+				C8AF50A319112E8700C911B7 /* SLFSettingsButton.h */,
+				C8AF50A419112E8700C911B7 /* SLFSettingsButton.m */,
+				C8AF50A019112E6A00C911B7 /* SLFSettingsViewController.h */,
+				C8AF50A119112E6A00C911B7 /* SLFSettingsViewController.m */,
 				C804DADC1905884E0004582C /* Selfy */,
 				C804DAF51905884E0004582C /* SelfyTests */,
 				C804DAD51905884E0004582C /* Frameworks */,
@@ -316,12 +326,14 @@
 			files = (
 				C804DAE71905884E0004582C /* SLFAppDelegate.m in Sources */,
 				C804DB79190AEB790004582C /* SLFNewNavigationController.m in Sources */,
+				C8AF50A519112E8700C911B7 /* SLFSettingsButton.m in Sources */,
 				C804DB101905A3A30004582C /* SLFTableViewCell.m in Sources */,
 				C804DAE31905884E0004582C /* main.m in Sources */,
 				C804DB07190588E50004582C /* SLFTableViewController.m in Sources */,
 				C804DB2A1906DAF40004582C /* SLFSelfyViewController.m in Sources */,
 				C8AF504C190FDD1400C911B7 /* SLFSignUpViewController.m in Sources */,
 				C804DB271906D6280004582C /* SLFLoginViewController.m in Sources */,
+				C8AF50A219112E6A00C911B7 /* SLFSettingsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
