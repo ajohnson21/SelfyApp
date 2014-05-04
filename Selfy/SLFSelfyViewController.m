@@ -7,9 +7,10 @@
 //
 
 #import "SLFSelfyViewController.h"
+#import "SLFFilterViewController.h"
 
 
-@interface SLFSelfyViewController () <UITextViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
+@interface SLFSelfyViewController () <UITextViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, SLFFilterViewControllerDelegate>
 @property (nonatomic) UIImage * originalImage;
 
 
@@ -27,6 +28,8 @@
     NSArray * filterNames;
     NSMutableArray * filterButtons;
     
+    SLFFilterViewController * filterVC;
+    
     float wh;
     
 }
@@ -37,33 +40,10 @@
     if (self) {
         // Custom initialization
         
-        
-        
         self.view.backgroundColor = [UIColor whiteColor];
         
         newForm = [[UIView alloc] initWithFrame:self.view.frame];
         [self.view addSubview:newForm];
-        
-//        filterButtons = [@[] mutableCopy];
-//        filterNames = @[
-//                        @"CIColorInvert",
-//                        @"CIColorMonochrome",
-//                        @"CIColorPosterize",
-//                        @"CIFalseColor",
-//                        @"CIMaximumComponent",
-//                        @"CIMinimumComponent",
-//                        @"CIPhotoEffectChrome",
-//                        @"CIPhotoEffectFade",
-//                        @"CIPhotoEffectInstant",
-//                        @"CIPhotoEffectMono",
-//                        @"CIPhotoEffectNoir",
-//                        @"CIPhotoEffectProcess",
-//                        @"CIPhotoEffectTonal",
-//                        @"CIPhotoEffectTransfer",
-//                        @"CISepiaTone",
-//                        @"CIVignette"
-//                        ];
-//        
         
         
         UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapScreen)];
@@ -79,13 +59,13 @@
     newForm = [[UIView alloc] initWithFrame:CGRectMake(20, 20, 280, self.view.frame.size.height - 40)];
     [self.view addSubview:newForm];
     
-        selfyImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 280, 220)];
+        selfyImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 30, 280, 220)];
         selfyImage.backgroundColor = [UIColor whiteColor];
 //        selfyImage.image = [UIImage imageNamed:@"boss"];
         selfyImage.contentMode = UIViewContentModeScaleAspectFit;
         [newForm addSubview:selfyImage];
     
-        captionField = [[UITextView alloc] initWithFrame:CGRectMake(0, 240, 280, 80)];
+        captionField = [[UITextView alloc] initWithFrame:CGRectMake(0, 260, 280, 60)];
         captionField.backgroundColor = [UIColor colorWithWhite:0.9 alpha:1.0];
         captionField.text = @"";
         captionField.delegate = self;
@@ -101,10 +81,11 @@
     [submitButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [newForm addSubview:submitButton];
     
-    
-    //    scrollview = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, 320, 80)];
-    //    scrollview.backgroundColor = [UIColor blackColor];
-    //    [self.view addSubview:scrollview];
+    filterVC = [[SLFFilterViewController alloc] initWithNibName:nil bundle:nil];
+    filterVC.delegate = self;
+//    filterVC.view.frame = CGRectMake(0, SCREEN_HEIGHT - 100, SCREEN_WIDTH, 100);
+    filterVC.view.frame = CGRectMake(0, 0, 320, 50);
+    [self.view addSubview:filterVC.view];
     
     
 }
@@ -162,23 +143,7 @@
 //    [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    //    wh = self.view.frame.size.height -20;
-    //
-    //
-    //    for (NSString * filterName in filterNames)
-    //    {
-    //        int i = (int)[filterNames indexOfObject:filterName];
-    //        int x = (wh + 10) * i + 10;
-    //
-    //        UIButton * filterButton = [[UIButton alloc] initWithFrame:CGRectMake(x, 10, wh, wh)];
-    //        filterButton.tag = i;
-    //        filterButton.backgroundColor = [UIColor whiteColor];
-    //        [filterButton addTarget:self action:@selector(switchFilter:) forControlEvents:UIControlEventTouchUpInside];
-    //        [filterButtons addObject:filterButton];
-    //        [scrollview addSubview:filterButton];
-    //
-    //        scrollview.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
-    //        scrollview.contentSize = CGSizeMake((wh + 10) * [filterNames count] + 10, self.view.frame.size.height);
+        wh = self.view.frame.size.height -20;
     
     
     [self createForm];
@@ -222,7 +187,14 @@
     
     selfyImage.image = originalImage;
     
+    filterVC.imageToFilter = originalImage;
+    
     NSLog(@"%@", self.originalImage);
+}
+
+-(void)updateCurrentImageWithFilteredImage:(UIImage *)image
+{
+    selfyImage.image = image;
 }
 
 
